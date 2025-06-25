@@ -20,14 +20,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Deploy using ssh
-        uses: appleboy/ssh-action@master
+      - name: Deploy to Lightsail
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
-          script: whoami
+          script: |
+            whoami
             cd ~/apps/js-cd
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
